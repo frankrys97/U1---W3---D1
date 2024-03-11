@@ -223,7 +223,8 @@ const movies = [
 const findOldestFilm = function (arrayOfFilms) {
   let oldestFilm = movies[0];
   arrayOfFilms.forEach((film) => {
-    if (film.Year < oldestFilm.Year) {
+    if (parseInt(film.Year) < parseInt(oldestFilm.Year)) { // Ho inserito parseInt per evitare
+      // che Javascript effettuasse una type coertion
       oldestFilm = film;
     }
   });
