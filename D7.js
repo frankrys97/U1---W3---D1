@@ -223,7 +223,8 @@ const movies = [
 const findOldestFilm = function (arrayOfFilms) {
   let oldestFilm = movies[0];
   arrayOfFilms.forEach((film) => {
-    if (parseInt(film.Year) < parseInt(oldestFilm.Year)) { // Ho inserito parseInt per evitare
+    if (parseInt(film.Year) < parseInt(oldestFilm.Year)) {
+      // Ho inserito parseInt per evitare
       // che Javascript effettuasse una type coertion
       oldestFilm = film;
     }
@@ -259,7 +260,8 @@ console.log(findTitle(movies));
 */
 
 const findMillennialFilm = function (arrayOfFilms) {
-  let millennialFilms = arrayOfFilms.filter((film) => film.Year > 2000);
+  let millennialFilms = arrayOfFilms.filter((film) => parseInt(film.Year) >= 2000); // va inserito il parseInt
+  // proprio perchè film.Year è una stringa e quindi va trasformata in numero, nonostante JS effettuasse una type coertion
 
   return millennialFilms;
 };
@@ -277,6 +279,12 @@ const sumYear = function (arrayOfFilms) {
   );
   return sum;
 };
+
+// Il fatto di inserire la variabile è un passaggio in piùà, perchè con reduce non c'è bisogno di una variabile d'appoggio
+// la stessa cosa avremmo potuto scriverlo semplicemente in questo modo:
+//
+// const sumYear = function (arrayOfFilms) {
+// return arrayOfFilms.reduce((accumulator, currentValue) => accumulator + parseInt(currentValue.Year),0);
 
 console.log(sumYear(movies));
 
@@ -298,7 +306,11 @@ console.log(findFilm(movies, "tt1731697"));
 */
 
 const findIndex = function (arrayOfFilms, year) {
-  let findIndice = arrayOfFilms.findIndex((film) => parseInt(film.Year) > year);
+  let findIndice = arrayOfFilms.findIndex((film) => parseInt(film.Year) > year); // ho preferito inserire maggiore e non 
+  // strettamente uguale per evitare il problema di avere il disposizione un anno preciso
+  // altrimenti strettamente uguaglianza verrebbe:
+  // parseInt(film.Year) === year
+  
   return findIndice;
 };
 
